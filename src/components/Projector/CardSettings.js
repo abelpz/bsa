@@ -15,7 +15,6 @@ function CardSettings({ classes }) {
     state: { fontSize, resourcesApp, resourceLinks },
     actions: { setAppConfig },
   } = useContext(AppContext);
-  const [projectorResource, setProjectorResource] = useState();
   const [projectorFontSize, setProjectorFontSize] = useState(
     localStorage.getItem('projectorFontSize') ?? 100
   );
@@ -23,10 +22,6 @@ function CardSettings({ classes }) {
   useEffect(() => {
     localStorage.setItem('projectorFontSize', projectorFontSize);
   }, [projectorFontSize]);
-
-  useEffect(() => {
-    localStorage.setItem('projectorResource', JSON.stringify(projectorResource));
-  }, [projectorResource]);
 
   const listItems = useMemo(
     () =>
@@ -36,7 +31,11 @@ function CardSettings({ classes }) {
     [resourceLinks, resourcesApp]
   );
 
-  const [resource, setResource] = useState(listItems[0]);
+  const [selectedResource, setSelectedResource] = useState(listItems[0]);
+
+  useEffect(() => {
+    localStorage.setItem('projectorResource', JSON.stringify(selectedResource));
+  }, [selectedResource]);
 
   const onClose = () => {
     setAppConfig((prev) => {
@@ -59,8 +58,10 @@ function CardSettings({ classes }) {
     }
   };
   const handleChange = (e) => {
-    setResource(listItems[e.target.value]);
-    setProjectorResource(listItems[e.target.value]);
+    const currentValue = listItems.find((el) => el.id === e.target.value);
+    if (currentValue) {
+      setSelectedResource(currentValue);
+    }
   };
 
   return (
@@ -82,7 +83,7 @@ function CardSettings({ classes }) {
           {isOpen ? 'Close' : 'Open'}
         </Button>
         <Typography>2. Choose resource from opened cards</Typography>
-        <Select value={resource.id} onChange={handleChange}>
+        <Select value={selectedResource.id} onChange={handleChange}>
           {listItems.map((el) => (
             <MenuItem key={el.id} value={el.id}>
               {el.title}({langNames[el.languageId].eng}|{el.name})
@@ -96,9 +97,10 @@ function CardSettings({ classes }) {
           max={150}
           min={50}
           step={10}
-          value={projectorFontSize}
+          value={parseInt(projectorFontSize)}
         />
         <Typography>4. Pre-default theme</Typography>
+        <Typography>In progress...</Typography>
       </Box>
     </Card>
   );

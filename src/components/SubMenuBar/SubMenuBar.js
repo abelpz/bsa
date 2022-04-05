@@ -147,7 +147,7 @@ function SubMenuBar() {
             title={t('Write_us')}
           />
 
-          <ProjectorAdd />
+          <ProjectorAdd handleCloseMainMenu={handleCloseMainMenu} />
 
           <MenuItem onClick={handleOpenUsersGuide} divider={true}>
             {t('User_guide')}
