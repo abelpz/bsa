@@ -13,6 +13,7 @@ import './i18next';
 import './styles/style.css';
 
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { Projector } from './components';
 // import reportWebVitals from './reportWebVitals';
 // const App = React.lazy(() => import('./App.js'));
 
@@ -21,6 +22,9 @@ ReactDOM.render(
   <ErrorBoundary>
     <BrowserRouter>
       <Switch>
+        <Route exact strict path={'/projector'}>
+          <Projector />
+        </Route>
         <ContextProviders>
           <Route>
             <SnackbarProvider maxSnack={3}>

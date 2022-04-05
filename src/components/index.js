@@ -14,6 +14,7 @@ export * from './FeedbackDialog';
 export * from './FrontModal';
 export * from './Intro';
 export * from './OBSVerses';
+export * from './Projector';
 export * from './SearchResources';
 export * from './SelectLanguage';
 export * from './SelectModeBible';

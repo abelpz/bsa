@@ -9,6 +9,7 @@ import {
   BookSelect,
   ChapterSelect,
   FeedbackDialog,
+  ProjectorAdd,
   SearchResources,
   SelectLanguage,
   SelectModeBible,
@@ -145,6 +146,8 @@ function SubMenuBar() {
             openFeedbackDialog={openFeedbackDialog}
             title={t('Write_us')}
           />
+
+          <ProjectorAdd />
 
           <MenuItem onClick={handleOpenUsersGuide} divider={true}>
             {t('User_guide')}
