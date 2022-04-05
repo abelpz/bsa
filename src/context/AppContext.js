@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 
 import { ResourcesContextProvider } from 'scripture-resources-rcl';
 import { useTranslation } from 'react-i18next';
@@ -61,7 +61,10 @@ export function AppContextProvider({ children }) {
     return checkLSVal('resourcesApp', [], 'object');
   });
 
-  const _resourceLinks = getResources(appConfig, resourcesApp);
+  const _resourceLinks = useMemo(
+    () => getResources(appConfig, resourcesApp),
+    [appConfig, resourcesApp]
+  );
   const [resourceLinks, setResourceLinks] = useState(_resourceLinks);
   const [resources, setResources] = useState([]);
   const [showBookSelect, setShowBookSelect] = useState(false);
@@ -157,7 +160,6 @@ export function AppContextProvider({ children }) {
       resourceLinks,
       resourcesApp,
       resources,
-      _resourceLinks,
       showBookSelect,
       showChapterSelect,
       showErrorReport,
