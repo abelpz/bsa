@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Card, CardContent, useContent, useCardState } from 'translation-helps-rcl';
 
@@ -32,16 +32,19 @@ export default function SupportTQ({
     owner: resource.owner ?? 'door43-catalog',
     server,
   };
-  const {
-    markdown,
-    items,
-    resourceStatus: { loading },
-    props: { languageId },
-  } = useContent(
+  const data = useContent(
     resource.subject === 'TSV Translation Questions'
       ? { ...tsvContent }
       : { ...mdContent }
   );
+  const {
+    markdown,
+    items,
+    resourceStatus,
+    props: { languageId },
+  } = data;
+  const { loading } = resourceStatus;
+  console.log(data);
 
   const {
     state: { item, headers, filters, itemIndex, markdownView },
@@ -49,6 +52,14 @@ export default function SupportTQ({
   } = useCardState({
     items,
   });
+
+  useEffect(() => {
+    if (item) {
+      localStorage.setItem(type, '__' + item.Question + '__\n\n' + item.Response);
+      localStorage.setItem('index', type + '_' + itemIndex);
+    }
+  }, [item, itemIndex, type]);
+
   return (
     <Card
       closeable

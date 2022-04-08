@@ -62,6 +62,13 @@ function USFMContent({ reference, content, type, fontSize }) {
   }, [resourceLink, reference.chapter]);
 
   useEffect(() => {
+    if (reference.verse && chapter) {
+      localStorage.setItem(type, getVerseText(chapter?.[reference.verse]?.verseObjects));
+      localStorage.setItem('index', type + '_' + reference.verse);
+    }
+  }, [chapter, reference.verse, type]);
+
+  useEffect(() => {
     const handleContextMenu = (e, key, verseObjects) => {
       e.preventDefault();
       setReferenceBlock({
@@ -91,9 +98,6 @@ function USFMContent({ reference, content, type, fontSize }) {
           goToBookChapterVerse(reference.bookId, reference.chapter, key);
         }
       };
-      if (reference.verse === key) {
-        localStorage.setItem(type, getVerseText(verseObjects));
-      }
 
       const verse = (
         <Box

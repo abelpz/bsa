@@ -1,11 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Box, Typography } from '@material-ui/core';
+import ReactMarkdown from 'react-markdown';
+import { Box } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 function Projector() {
+  const { t } = useTranslation();
   const [fontSize, setFontSize] = useState(
     localStorage.getItem('projectorFontSize') ?? 100
   );
+
+  const [content, setContent] = useState('');
+  const [index, setIndex] = useState(0);
 
   const [isObs, setIsObs] = useState(localStorage.getItem('isObs') ?? false);
 
@@ -25,6 +31,10 @@ function Projector() {
 
       case 'isObs':
         setIsObs(e.newValue);
+        break;
+
+      case 'index':
+        setIndex(e.newValue + 1);
         break;
 
       case 'projectorResource':
@@ -47,16 +57,15 @@ function Projector() {
 
   const { bookId, chapter, verse } = isObs === 'true' ? reference.obs : reference.bible;
 
+  useEffect(() => {
+    setContent(localStorage.getItem(resource.owner + '__' + resource.name));
+  }, [resource.name, resource.owner, index, bookId, chapter, verse]);
+
   return (
-    <Box fontSize={fontSize + 'px'}>
-      Projector
-      <br />
-      <Typography>{JSON.stringify({ fontSize, resource, reference })}</Typography>
-      <Typography>
-        Content:{localStorage.getItem(resource.owner + '__' + resource.name)}
-      </Typography>
-      <Typography>Reference: {`${bookId} ${chapter}:${verse}`}</Typography>
-      <Typography>Name: {resource.title}</Typography>
+    <Box fontSize={fontSize * 2 + '%'}>
+      <ReactMarkdown>{content}</ReactMarkdown>
+      <div>{`${t(bookId)} ${chapter}:${verse}`}</div>
+      <div>{resource.title}</div>
     </Box>
   );
 }

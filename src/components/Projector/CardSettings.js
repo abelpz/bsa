@@ -12,12 +12,14 @@ function CardSettings({ classes }) {
   const [isOpen, setIsOpen] = useState(false);
   const projectorWindow = useRef();
   const {
-    state: { fontSize, resourcesApp, resourceLinks },
+    state: { fontSize, resourcesApp, appConfig },
     actions: { setAppConfig },
   } = useContext(AppContext);
   const [projectorFontSize, setProjectorFontSize] = useState(
     localStorage.getItem('projectorFontSize') ?? 100
   );
+
+  const currentCards = useMemo(() => appConfig.lg.map((el) => el.i), [appConfig.lg]);
 
   useEffect(() => {
     localStorage.setItem('projectorFontSize', projectorFontSize);
@@ -26,9 +28,9 @@ function CardSettings({ classes }) {
   const listItems = useMemo(
     () =>
       resourcesApp.filter((el) => {
-        return resourceLinks.includes(el.link);
+        return currentCards?.includes(el.owner + '__' + el.name);
       }),
-    [resourceLinks, resourcesApp]
+    [currentCards, resourcesApp]
   );
 
   const [selectedResource, setSelectedResource] = useState(listItems[0]);
@@ -94,7 +96,7 @@ function CardSettings({ classes }) {
         <FontSizeSlider
           onChange={setProjectorFontSize}
           marks={false}
-          max={150}
+          max={500}
           min={50}
           step={10}
           value={parseInt(projectorFontSize)}

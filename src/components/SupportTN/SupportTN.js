@@ -66,6 +66,19 @@ export default function SupportTN({
   });
 
   useEffect(() => {
+    if (item) {
+      localStorage.setItem(
+        type,
+        '__' + item.GLQuote + '__\n\n(_' + item.OrigQuote + '_)\n\n' + item.OccurrenceNote
+      );
+    }
+  }, [item, type]);
+
+  useEffect(() => {
+    localStorage.setItem('index', type + '_' + itemIndex);
+  }, [itemIndex, type, chapter, verse]);
+
+  useEffect(() => {
     if (item && setTaRef) {
       const { OrigQuote, SupportReference, Occurrence, ID } = item;
       const quote = {

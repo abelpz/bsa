@@ -38,6 +38,16 @@ export default function SupportTWL(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reference]);
 
+  useEffect(() => {
+    if (item) {
+      localStorage.setItem(type, item.markdown);
+    }
+  }, [item, type]);
+
+  useEffect(() => {
+    localStorage.setItem('index', type + '_' + itemIndex);
+  }, [itemIndex, type, chapter, verse]);
+
   return (
     <Card
       closeable
