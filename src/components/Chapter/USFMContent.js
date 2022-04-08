@@ -111,6 +111,9 @@ function USFMContent({ reference, content, type, fontSize, languageId }) {
           goToBookChapterVerse(reference.bookId, reference.chapter, key);
         }
       };
+      if (reference.verse === key) {
+        localStorage.setItem(type, getVerseText(verseObjects));
+      }
 
       const verse = (
         <Box

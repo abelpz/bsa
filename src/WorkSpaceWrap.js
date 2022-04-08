@@ -94,6 +94,7 @@ export default function WorkSpaceWrap() {
 
   const availableBookList = useMemo(() => {
     const newBookList = [];
+    localStorage.setItem('isObs', bookId === 'obs');
     if (bookId === 'obs') {
       newBookList.push('obs');
     } else {
