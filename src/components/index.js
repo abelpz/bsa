@@ -13,6 +13,7 @@ export * from './DownloadLayout';
 export * from './FeedbackDialog';
 export * from './FrontModal';
 export * from './Intro';
+export * from './Notepad';
 export * from './OBSVerses';
 export * from './Projector';
 export * from './SearchResources';

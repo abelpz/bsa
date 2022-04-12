@@ -17,6 +17,7 @@ import {
   BookSelect,
   ChapterSelect,
   FeedbackDialog,
+  NotepadAdd,
   ProjectorAdd,
   SearchResources,
   SelectLanguage,
@@ -160,6 +161,8 @@ function SubMenuBar() {
             openFeedbackDialog={openFeedbackDialog}
             title={t('Write_us')}
           />
+
+          <NotepadAdd handleCloseMainMenu={handleCloseMainMenu} />
 
           <ProjectorAdd handleCloseMainMenu={handleCloseMainMenu} />
 

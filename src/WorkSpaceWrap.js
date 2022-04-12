@@ -11,6 +11,7 @@ import { columns } from './config/base';
 import { getLayoutType } from './helper';
 
 import useStyles from './style';
+import Notepad from './components/Notepad/Notepad';
 
 const breakpoints = { lg: 900, md: 700, sm: 500 };
 
@@ -82,6 +83,8 @@ export default function WorkSpaceWrap() {
   const cards = (appConfig[breakpoint.name] ?? []).map((item) =>
     item.i === 'projector' ? (
       <CardSettings key={item.i} classes={classes} />
+    ) : item.i === 'notepad' ? (
+      <Notepad key={item.i} classes={classes} />
     ) : (
       <Card
         key={item.i}
