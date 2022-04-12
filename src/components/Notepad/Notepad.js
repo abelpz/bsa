@@ -5,6 +5,7 @@ import { Card } from 'translation-helps-rcl';
 import { AppContext } from '../../context';
 import Main from './Main';
 import Sidebar from './Sidebar';
+import './App.css';
 
 function Notepad({ classes }) {
   const [notes, setNotes] = useState(

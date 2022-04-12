@@ -4,6 +4,7 @@ import { getXY } from 'resource-workspace-rcl';
 import { AppContext } from '../../context';
 import { defaultCard, columns } from '../../config/base';
 import { useTranslation } from 'react-i18next';
+import './App.css';
 
 function NotepadAdd({ handleCloseMainMenu }) {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ function NotepadAdd({ handleCloseMainMenu }) {
         const pos = getXY(appConfig[k], columns[k], defaultCard[k].h, defaultCard[k].w);
         next[k] = next[k].concat({
           ...defaultCard[k],
-          h: 12,
+          h: 8,
           x: pos.x,
           y: pos.y,
           i: 'notepad',
