@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Menu, MenuItem } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useSnackbar } from 'notistack';
-
+import VerseInPictures from './../VerseInPictures/VerseInPictures';
 import { AppContext, ReferenceContext } from '../../context';
 
 const initialPosition = {
@@ -63,6 +63,9 @@ function ContextMenu({ position, setPosition, PopoverClasses }) {
       })`
     );
   };
+  const verseForPictures = `${referenceBlock.text} (${t(referenceBlock.bookId)} ${
+    referenceBlock.chapter
+  }:${referenceBlock.verse})`;
 
   return (
     <Menu
@@ -78,6 +81,8 @@ function ContextMenu({ position, setPosition, PopoverClasses }) {
       <MenuItem onClick={handleReferenceToClipboard}>
         {t('Copy_reference_to_clipboard')}
       </MenuItem>
+
+      <VerseInPictures verse={verseForPictures} />
     </Menu>
   );
 }

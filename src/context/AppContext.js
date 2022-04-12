@@ -72,6 +72,7 @@ export function AppContextProvider({ children }) {
   const [showErrorReport, setShowErrorReport] = useState(false);
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
   const [showDownloadLayout, setShowDownloadLayout] = useState(false);
+  const [showVerseInPictures, setShowVerseInPictures] = useState(false);
   const [errorFile, setErrorFile] = useState('');
   const [fontSize, setFontSize] = useState(_fontSize ? _fontSize : 100);
   const [loadIntro, setLoadIntro] = useState(false);
@@ -176,6 +177,7 @@ export function AppContextProvider({ children }) {
       showSettingsMenu,
       layoutStorage,
       showDownloadLayout,
+      showVerseInPictures,
     },
     actions: {
       setTaRef,
@@ -202,6 +204,7 @@ export function AppContextProvider({ children }) {
       setShowSettingsMenu,
       setLayoutStorage,
       setShowDownloadLayout,
+      setShowVerseInPictures,
     },
   };
 
