@@ -26,7 +26,7 @@ function Settings({ setAnchorMainMenu }) {
     state: { fontSize, showSettingsMenu },
     actions: { setFontSize, setShowSettingsMenu },
   } = useContext(AppContext);
-
+  console.log(fontSize);
   return (
     <>
       <MenuItem
