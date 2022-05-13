@@ -4,7 +4,6 @@ import { getXY } from 'resource-workspace-rcl';
 import { AppContext } from '../../context';
 import { defaultCard, columns } from '../../config/base';
 import { useTranslation } from 'react-i18next';
-import './App.css';
 
 function NotepadAdd({ handleCloseMainMenu }) {
   const { t } = useTranslation();
